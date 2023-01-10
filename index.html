@@ -3,42 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
+  <link rel="stylesheet" href="styles.css">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
   <title>Frontend Mentor | E-commerce product page</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+ 
 </head>
 <body>
+  <div id="container">
+    <div id="banner">
+      <div id="left-banner">
+        <div id="nav-bar">
+          <img src="images\logo.svg" alt="Category logo" id="category">
+          <div class="nav-tile">Collections</div>
+          <div class="nav-tile">Men</div>
+          <div class="nav-tile">Women</div>
+          <div class="nav-tile">About</div>
+          <div class="nav-tile">Contact</div>
+        </div>
+      </div>
+      <div id="right-banner">
+        <img src="images\icon-cart_gray.svg" alt="shopping-cart" id="cart">
+        <img src="images\image-avatar.png" alt="customer-avatar" id="avatar">
+      </div>
+    </div>
 
-  Collections
-  Men
-  Women
-  About
-  Contact
+    <div id="line"></div>
+    
+    <div id="content-container">
+      <div class="img-card">
+        <img src="images\image-product-1.jpg" alt="product-one" id="main-img">
+        <div id="thumbnails">
+          <img src="images\image-product-1-thumbnail.jpg" alt="thumbnail-one" id="thumb-one" class="thumbnail" data-pic = "images/image-product-1.jpg" data-loc="1">
+          <img src="images\image-product-2-thumbnail.jpg" alt="thumbnail-two" id="thumb-two" class="thumbnail" data-pic = "images/image-product-2.jpg" data-loc="2">
+          <img src="images\image-product-3-thumbnail.jpg" alt="thumbnail-three" id="thumb-three" class="thumbnail" data-pic = "images/image-product-3.jpg" data-loc="3">
+          <img src="images\image-product-4-thumbnail.jpg" alt="thumbnail-four" id="thumb-four" class="thumbnail" data-pic = "images/image-product-4.jpg" data-loc="4">
+        </div>
+      </div>
 
-  Sneaker Company
-
-  Fall Limited Edition Sneakers
-
-  These low-profile sneakers are your perfect casual wear companion. Featuring a 
-  durable rubber outer sole, they’ll withstand everything the weather can offer.
-
-  $125.00
-  50%
-  $250.00
-
-  0
-  Add to cart
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+      <div id="prod-card">
+        <div id="company-label">
+          SNEAKER COMPANY
+        </div>
+        <div class="header">
+          <h1>Fall Limited Edition Sneakers</h1>
+        </div>
+        <div id="prod-desc">
+          These low-profile sneakers are your perfect casual wear companion. Featuring a 
+          durable rubber outer sole, they’ll withstand everything the weather can offer.
+        </div>
+        <div id="curr-price">
+          <h1>$125.00</h1>
+          <p class="discount">50%</p>
+        </div>
+        <div id="orig-price">
+          $250.00
+        </div>
+        <div id="button-card">
+          <div id="qty-button">
+            <img src="images\icon-minus.svg" alt="minus-button" id="minus-btn">
+            <div id="counter">0</div>
+            <img src="images\icon-plus.svg" alt="plus-button" id="plus-btn">
+          </div>
+          <div id="cart-button">
+            <img src="images\icon-cart.svg" alt="shopping-cart-icon" id="cart-icon">
+            <p>Add to cart</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+      Coded by <a href="#" target="_blank">Greg Gaines</a>.
+    </div>
   </div>
+  <script src="app.js"></script>  
 </body>
 </html>
