@@ -64,23 +64,27 @@ function lightBox(item){
         document.body.appendChild(lightbox);
 
         let loc = item.dataset.loc
+        document.querySelector(`[data-thumbLoc="${loc}"]`).className='active'
         document.querySelector(`[data-thumbLoc="${loc}"]`).style.visibility='visible'
+
+
+
+        // Nav buttons --------------------------------------------------------------------
 
         const backButton = document.getElementById('back-btn')
         const nextButton = document.getElementById('next-btn')
 
         backButton.addEventListener('click',()=>{
+            document.querySelector(`[data-thumbLoc="${loc}"]`).className='overlay'
             document.querySelector(`[data-thumbLoc="${loc}"]`).style.visibility='hidden'
             loc == 1 ? loc = 4: loc--;
             console.log(loc)
-
+            document.querySelector(`[data-thumbLoc="${loc}"]`).className='active'
             document.querySelector(`[data-thumbLoc="${loc}"]`).style.visibility='visible'
+            
             document.getElementById('light-img').remove()
-
             image = document.querySelector(`[data-loc="${loc}"]`).dataset.pic
-            
-            '<img src="${image}" id="light-img" draggable="false"></img>'
-            
+                    
             let div = document.createElement('img')
             div.src=image
             div.id='light-img';
@@ -88,22 +92,25 @@ function lightBox(item){
         })
 
         nextButton.addEventListener('click',()=>{
+            document.querySelector(`[data-thumbLoc="${loc}"]`).className='overlay'
             document.querySelector(`[data-thumbLoc="${loc}"]`).style.visibility='hidden'
             loc == 4 ? loc = 1: loc++;
             console.log(loc)
-
+            document.querySelector(`[data-thumbLoc="${loc}"]`).className='active'
             document.querySelector(`[data-thumbLoc="${loc}"]`).style.visibility='visible'
+            
+            
             document.getElementById('light-img').remove()
-
-            image = document.querySelector(`[data-loc="${loc}"]`).dataset.pic
-                        
+            image = document.querySelector(`[data-loc="${loc}"]`).dataset.pic                       
+            
             let div = document.createElement('img');
             div.src=image;
             div.id='light-img';
             document.getElementById('lb-img-container').appendChild(div);
         })
 
-    //arrow highlights 
+    //arrow highlights-------------------------------------------------------------------------
+
         backButton.addEventListener('mouseover',()=>{
             document.querySelector('.back-arrow').style.stroke='var(--orange)'
         })
@@ -117,6 +124,29 @@ function lightBox(item){
             document.querySelector('.next-arrow').style.stroke='#1D2026'
         })
 
+        const thumbBoxes = document.querySelectorAll('.thumb-box');
+        thumbBoxes.forEach((item)=> {
+                item.addEventListener('mouseover',()=>{
+               
+                    if(item.children[0].className=='active'){
+                        item.children[0].className='active'
+                        item.children[0].style.visibility='visible'
+                    }else{
+                        item.children[0].className='overlay'
+                        item.children[0].style.visibility='visible'
+                    }
+                    
+                })
+                item.addEventListener('mouseout',()=>{
+                    
+                    if(item.children[0].className=='active'){
+                        item.children[0].className=='active'
+                        // item.children[0].style.visibility='visible'
+                    }else{
+                        item.children[0].style.visibility ='hidden'
+                    }
+                })
+            });
 
         const closeBtn = document.getElementById('close-btn');
         closeBtn.addEventListener('click',()=>{
@@ -138,13 +168,6 @@ function lightBox(item){
 
 
 
-const thumbBoxes = document.querySelectorAll('.thumb-box');
-thumbBoxes.forEach((item)=> {
-        item.addEventListener('mouseover',()=>{
-            console.log(item)
-            console.log(item.firstChild)
-        })
-    });
 
 
 

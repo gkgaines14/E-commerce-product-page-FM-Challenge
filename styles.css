@@ -350,6 +350,19 @@ color: var(--pale-orange);
     position:absolute;
     background-color: var(--white);
     border-radius: 15px;
+    /* border: solid 2px var(--orange); */
+    width: 90px;
+    height: 90px;
+    cursor: pointer;
+    z-index: 20;
+    opacity: .7;
+    visibility: hidden;
+}
+
+.active{
+    position:absolute;
+    background-color: var(--white);
+    border-radius: 15px;
     border: solid 2px var(--orange);
     width: 90px;
     height: 90px;
