@@ -1,21 +1,138 @@
-let image
+let image;
+let loc;
+let quantity =0 ;
+let cartCount = 0;
+let cartValue = 0;
+let print = false;
+let imgPos = 0;
 
 const lightbox = document.createElement('div');
-lightbox.id = 'lightbox'
+lightbox.id = 'lightbox';
 
 // Dom elements
 
 const thumbnails = document.querySelectorAll('.thumbnail');
+const minusButton = document.getElementById('minus-btn');
+const plusButton = document.getElementById('plus-btn');
+const addCartButton = document.getElementById('cart-btn');
+const counter = document.getElementById('counter');
+const shoppingCart = document.getElementById('shopping-cart');
+const cartIcon = document.getElementById('cart');
+const deleteButton = document.getElementById('delete-btn');
 
+const backButtonMobile = document.getElementById('back-btn-mbl');
+const nextButtonMobile = document.getElementById('next-btn-mbl');
+const mainImage = document.getElementById('main-img-mbl');
+const menuButton = document.getElementById('hamburger-menu');
 
+let imageArr =[
+    'images/image-product-1.jpg',
+    'images/image-product-2.jpg',
+    'images/image-product-3.jpg',
+    'images/image-product-4.jpg'
+]
 
 // Event Listners
 
+cartIcon.addEventListener('click',()=>{
+    if(shoppingCart.style.visibility=='visible'){
+        shoppingCart.style.visibility = 'hidden';
+    }else{
+        shoppingCart.style.visibility='visible';
+    }
+});
+
 thumbnails.forEach(item=>{
-    item.addEventListener('click',lightBox(item))
+    item.addEventListener('click',lightBox(item));
+});
+
+plusButton.addEventListener('click',()=>{
+    quantity++;
+    counter.innerHTML = quantity;
+});
+
+minusButton.addEventListener('click',()=>{
+    quantity--;
+    if(quantity<0){
+        quantity = 0;
+    }
+    counter.innerHTML = quantity;
+});
+
+addCartButton.addEventListener('click',()=>{
+    cartCount +=quantity;
+    quantity = 0;
+    counter.innerHTML = quantity;
+    cartValue = cartCount*125;
+    const cartData = document.createElement('div');
+    cartData.id = 'cart-bottom';
+
+    if(cartCount!=0){
+        document.getElementById('cart-count').style.visibility = 'visible';
+        document.getElementById('cart-count').innerHTML = cartCount;
+
+
+        if(print===true){
+            document.getElementById('cart-bottom').remove();
+
+            cartData.innerHTML = `
+            <div id="cart-content-card">
+                <img src="images/image-product-1.jpg" alt="item-image" id="cart-item-img">
+                <div id="cart-desc">
+                    <div id="cart-item-name">
+                        Fall Limited Edition Sneakers
+                    </div>
+                    <div id="cart-pricing">
+                        $125.00 x ${cartCount}  <span id="cart-total">$${cartValue}.00</span>
+                    </div>
+                </div>
+                <img src="images/icon-delete.svg" alt="cart-trash-button" id="delete-btn">
+            </div>
+            <div id="checkout-btn">Checkout</div>
+            `;
+
+            shoppingCart.appendChild(cartData);
+            
+        }else{
+            cartData.innerHTML = `
+            <div id="cart-content-card">
+                <img src="images/image-product-1.jpg" alt="item-image" id="cart-item-img">
+                <div id="cart-desc">
+                    <div id="cart-item-name">
+                        Fall Limited Edition Sneakers
+                    </div>
+                    <div id="cart-pricing">
+                        $125.00 x ${cartCount}  <span id="cart-total">$${cartValue}.00</span>
+                    </div>
+                </div>
+                <img src="images/icon-delete.svg" alt="cart-trash-button" id="delete-btn">
+            </div>
+            <div id="checkout-btn">Checkout</div>
+            `;
+                
+            shoppingCart.appendChild(cartData);
+            document.getElementById('empty-cart').style.display = 'none'
+            print = true;
+
+        }
+        
+    }
+    const deleteButton = document.getElementById('delete-btn');
+    console.log(deleteButton)
+
+    deleteButton.addEventListener('click',()=>{
+        console.log('hi')
+        document.getElementById('cart-bottom').remove();
+        print = false;
+        cartCount = 0;
+        cartValue =0;
+        document.getElementById('cart-count').style.visibility = 'hidden';
+        document.getElementById('empty-cart').style.display = 'flex'
+
+    })
 })
 
-console.log(thumbnails)
+
 
 function lightBox(item){
     item.addEventListener('click',()=>{
@@ -40,20 +157,20 @@ function lightBox(item){
         </div>
         <div id="img-card-light">
             <div id="thumb-one-lb" class="thumb-box">
-                <div class="overlay" data-thumbLoc="1"></div>
-                <img src="images/image-product-1-thumbnail.jpg" alt="thumbnail-one" class="thumbnail-lb">
+                <div class="overlay" data-thumbloc="1"></div>
+                <img src="images/image-product-1-thumbnail.jpg" alt="thumbnail-one" class="thumbnail-lb" data-pic = "images/image-product-1.jpg">
             </div>
             <div id=" id="thumb-two-lb" class="thumb-box">
-                <div class="overlay" data-thumbLoc="2"></div>
-                <img src="images/image-product-2-thumbnail.jpg" alt="thumbnail-two" class="thumbnail-lb">
+                <div class="overlay" data-thumbloc="2"></div>
+                <img src="images/image-product-2-thumbnail.jpg" alt="thumbnail-two" class="thumbnail-lb" data-pic = "images/image-product-2.jpg">
             </div>
             <div id=" id="thumb-three-lb" class="thumb-box">
-                <div class="overlay" data-thumbLoc="3"></div>
-                <img src="images/image-product-3-thumbnail.jpg" alt="thumbnail-three" class="thumbnail-lb">
+                <div class="overlay" data-thumbloc="3" id="overlay-the"></div>
+                <img src="images/image-product-3-thumbnail.jpg" alt="thumbnail-three" class="thumbnail-lb" data-pic = "images/image-product-3.jpg">
             </div>
             <div id=" id="thumb-four-lb" class="thumb-box">
-                <div class="overlay" data-thumbLoc="4"></div>
-                <img src="images/image-product-4-thumbnail.jpg" alt="thumbnail-four" class="thumbnail-lb">
+                <div class="overlay" data-thumbloc="4"></div>
+                <img src="images/image-product-4-thumbnail.jpg" alt="thumbnail-four" class="thumbnail-lb" data-pic = "images/image-product-4.jpg">
             </div>
         </div>
         
@@ -63,24 +180,24 @@ function lightBox(item){
         lightbox.appendChild(lightCard);
         document.body.appendChild(lightbox);
 
-        let loc = item.dataset.loc
-        document.querySelector(`[data-thumbLoc="${loc}"]`).className='active'
-        document.querySelector(`[data-thumbLoc="${loc}"]`).style.visibility='visible'
+        loc = item.dataset.loc
+        document.querySelector(`[data-thumbloc="${loc}"]`).className='active'
+        document.querySelector(`[data-thumbloc="${loc}"]`).style.visibility='visible'
 
 
 
-        // Nav buttons --------------------------------------------------------------------
+    // Nav buttons --------------------------------------------------------------------
 
         const backButton = document.getElementById('back-btn')
         const nextButton = document.getElementById('next-btn')
 
         backButton.addEventListener('click',()=>{
-            document.querySelector(`[data-thumbLoc="${loc}"]`).className='overlay'
-            document.querySelector(`[data-thumbLoc="${loc}"]`).style.visibility='hidden'
+            document.querySelector(`[data-thumbloc="${loc}"]`).className='overlay'
+            document.querySelector(`[data-thumbloc="${loc}"]`).style.visibility='hidden'
             loc == 1 ? loc = 4: loc--;
             console.log(loc)
-            document.querySelector(`[data-thumbLoc="${loc}"]`).className='active'
-            document.querySelector(`[data-thumbLoc="${loc}"]`).style.visibility='visible'
+            document.querySelector(`[data-thumbloc="${loc}"]`).className='active'
+            document.querySelector(`[data-thumbloc="${loc}"]`).style.visibility='visible'
             
             document.getElementById('light-img').remove()
             image = document.querySelector(`[data-loc="${loc}"]`).dataset.pic
@@ -89,21 +206,24 @@ function lightBox(item){
             div.src=image
             div.id='light-img';
             document.getElementById('lb-img-container').appendChild(div)
+
+
+
         })
 
         nextButton.addEventListener('click',()=>{
-            document.querySelector(`[data-thumbLoc="${loc}"]`).className='overlay'
-            document.querySelector(`[data-thumbLoc="${loc}"]`).style.visibility='hidden'
+            document.querySelector(`[data-thumbloc="${loc}"]`).className='overlay'
+            document.querySelector(`[data-thumbloc="${loc}"]`).style.visibility='hidden'
             loc == 4 ? loc = 1: loc++;
             console.log(loc)
-            document.querySelector(`[data-thumbLoc="${loc}"]`).className='active'
-            document.querySelector(`[data-thumbLoc="${loc}"]`).style.visibility='visible'
+            document.querySelector(`[data-thumbloc="${loc}"]`).className='active'
+            document.querySelector(`[data-thumbloc="${loc}"]`).style.visibility='visible'
             
-            
+            // replace image
             document.getElementById('light-img').remove()
             image = document.querySelector(`[data-loc="${loc}"]`).dataset.pic                       
             
-            let div = document.createElement('img');
+            const div = document.createElement('img');
             div.src=image;
             div.id='light-img';
             document.getElementById('lb-img-container').appendChild(div);
@@ -123,6 +243,8 @@ function lightBox(item){
         nextButton.addEventListener('mouseout',()=>{
             document.querySelector('.next-arrow').style.stroke='#1D2026'
         })
+    
+    // Thumbnail controls-----------------------------------------------------------------------
 
         const thumbBoxes = document.querySelectorAll('.thumb-box');
         thumbBoxes.forEach((item)=> {
@@ -137,14 +259,39 @@ function lightBox(item){
                     }
                     
                 })
+
                 item.addEventListener('mouseout',()=>{
                     
                     if(item.children[0].className=='active'){
                         item.children[0].className=='active'
-                        // item.children[0].style.visibility='visible'
                     }else{
                         item.children[0].style.visibility ='hidden'
                     }
+                })
+
+                item.addEventListener('click',()=>{
+                    console.log(item.children[0].className)
+                    console.log(document.querySelector('.active'))
+
+
+                    document.querySelector('.active').style.visibility = 'hidden'
+                    document.querySelector('.active').className = 'overlay'
+
+                    item.children[0].className='active'
+                    item.children[0].style.visibility='visible'
+
+                    // replace image
+                    document.getElementById('light-img').remove()
+                    image = item.children[1].dataset.pic
+
+                    const div = document.createElement('img');
+                    div.src=image;
+                    div.id='light-img';
+                    document.getElementById('lb-img-container').appendChild(div);
+
+                    
+                    loc = item.children[0].dataset.thumbloc
+                    console.log(item.children[0].dataset.thumbloc)
                 })
             });
 
@@ -158,18 +305,37 @@ function lightBox(item){
     })
 }
 
-// console.log(image)
 
+nextButtonMobile.addEventListener('click',()=>{
+    imgPos++
+    console.log(imgPos)
+    if(imgPos==4){
+        imgPos=0
+        mainImage.style.backgroundImage = `url(${imageArr[imgPos]})`
 
+    }else{
+        mainImage.style.backgroundImage = `url(${imageArr[imgPos]})`
+    }
+});
 
+backButtonMobile.addEventListener('click',()=>{
+    imgPos--
+    console.log(imgPos)
+    if(imgPos==-1){
+        imgPos=3
+        mainImage.style.backgroundImage = `url(${imageArr[imgPos]})`
 
+    }else{
+        mainImage.style.backgroundImage = `url(${imageArr[imgPos]})`
+    }
+});
 
+menuButton.addEventListener('click',()=>{
+    const menu = document.getElementById("menu")
+    menu.style.display = 'block'
+    const closebtn = document.getElementById("menu-close")
+    closebtn.addEventListener('click',()=>{
+        menu.style.display = 'none'
+    })
 
-
-
-
-
-
-
-
-// Shopping Cart ----------------------------------------------------
+});

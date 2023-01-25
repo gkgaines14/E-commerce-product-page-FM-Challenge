@@ -8,11 +8,25 @@
   <title>Frontend Mentor | E-commerce product page</title>
  
 </head>
-<body>
+<body>  
   <div id="container">
+    <div id="menu">
+      <div id="menu-close">
+        <img src="images\icon-close.svg" alt="Menu Close Button" id="close-x">
+      </div>
+      <ul id="menu-list">
+        <li>Collections</li>
+        <li>Men</li>
+        <li>Women</li>
+        <li>About</li>
+        <li>Contact</li>
+      </ul>
+  
+    </div>
     <div id="banner">
       <div id="left-banner">
         <div id="nav-bar">
+          <img src="images\icon-menu.svg" alt="sandwich menu" id="hamburger-menu">
           <img src="images\logo.svg" alt="Category logo" id="category">
           <div class="nav-tile">Collections</div>
           <div class="nav-tile">Men</div>
@@ -30,13 +44,20 @@
     <div id="line"></div>
     
     <div id="content-container">
-      <div class="img-card">
+      <div id="img-card">
         <img src="images\image-product-1.jpg" alt="product-one" id="main-img">
         <div id="thumbnails">
           <img src="images\image-product-1-thumbnail.jpg" alt="thumbnail-one" id="thumb-one" class="thumbnail" data-pic = "images/image-product-1.jpg" data-loc="1">
           <img src="images\image-product-2-thumbnail.jpg" alt="thumbnail-two" id="thumb-two" class="thumbnail" data-pic = "images/image-product-2.jpg" data-loc="2">
           <img src="images\image-product-3-thumbnail.jpg" alt="thumbnail-three" id="thumb-three" class="thumbnail" data-pic = "images/image-product-3.jpg" data-loc="3">
           <img src="images\image-product-4-thumbnail.jpg" alt="thumbnail-four" id="thumb-four" class="thumbnail" data-pic = "images/image-product-4.jpg" data-loc="4">
+        </div>
+      </div>
+      <div id="img-card-mbl">
+        <div id="main-img-mbl"></div> 
+        <div id="button-bar-mbl">
+          <svg viewBox="-3 -13 20 45" xmlns="http://www.w3.org/2000/svg" class="nav-btn" id="back-btn-mbl"><path d="M11 1 3 9l8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd"/ class="back-arrow"></svg>
+          <svg viewBox="-5 -13 20 45" xmlns="http://www.w3.org/2000/svg" class="nav-btn" id="next-btn-mbl"><path d="m2 1 8 8-8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd"/ class="next-arrow"></svg>
         </div>
       </div>
 
@@ -51,30 +72,42 @@
           These low-profile sneakers are your perfect casual wear companion. Featuring a 
           durable rubber outer sole, they’ll withstand everything the weather can offer.
         </div>
-        <div id="curr-price">
-          <h1>$125.00</h1>
-          <p class="discount">50%</p>
-        </div>
-        <div id="orig-price">
-          $250.00
-        </div>
-        <div id="button-card">
+          <div id="prices">
+            <div id="curr-price">
+              <h1>$125.00</h1>
+              <p class="discount">50%</p>
+            </div>
+            <div id="orig-price">
+              $250.00
+            </div>
+          </div>
+          <div id="button-card">
           <div id="qty-button">
             <img src="images\icon-minus.svg" alt="minus-button" id="minus-btn">
             <div id="counter">0</div>
             <img src="images\icon-plus.svg" alt="plus-button" id="plus-btn">
           </div>
-          <div id="cart-button">
+          <div id="cart-btn">
             <img src="images\icon-cart.svg" alt="shopping-cart-icon" id="cart-icon">
             <p>Add to cart</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="attribution">
-      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-      Coded by <a href="#" target="_blank">Greg Gaines</a>.
-    </div>
+      <div id="shopping-cart">
+        <div id="cart-header">Cart</div>
+        <div id="line"></div>
+        <div id="empty-cart">
+          <p>Your cart is empty.</p>
+        </div>
+      </div>
+  </div>
+  <div id="cart-count">
+    3
+  </div>
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="https://github.com/gkgaines14" target="_blank">Greg Gaines</a>.
   </div>
   <script src="app.js"></script>  
 </body>
